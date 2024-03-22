@@ -1,0 +1,62 @@
+{
+  "name": "survival_explorer",
+  "title": "Survival Explorer Web App",
+  "summary": "Survival Analysis Webapplet to accompany the Cohort Browser",
+  "dxapi": "1.0.0",
+  "version": "0.0.1",
+  "inputSpec": [
+    {
+      "name": "record_dxlink",
+      "label": "Cohort or Dashboard(s)",
+      "class": "array:record"
+    },
+    {
+      "name": "combine_cohorts",
+      "label": "Combine objects",
+      "class": "boolean",
+      "default": false,
+      "help": "If true, combines all provided objects and includes object name as predictor variable. Objects must be compatible (i.e. have same tiles)."
+    }
+  ],
+  "outputSpec": [],
+  "httpsApp": {"ports":[443], "shared_access": "VIEW"},
+  "access": {
+    "network": ["*"],
+    "project": "CONTRIBUTE",
+    "allProjects": "VIEW"
+  },
+  "runSpec": {
+    "timeoutPolicy": {
+      "*": {
+        "hours": 3
+      }
+    },
+    "interpreter": "python3",
+    "release": "20.04",
+    "version":"0",
+    "distribution": "Ubuntu",
+    "file": "src/start_app.py",
+    "execDepends": [
+      {"name": "dash", "version": "2.9.2", "package_manager": "pip"},
+      {"name": "numpy", "version": "1.22.4", "package_manager": "pip"},
+      {"name": "dash-bootstrap-components", "version": "1.4.0", "package_manager": "pip"},
+      {"name": "dash-loading-spinners", "version": "1.0.0", "package_manager": "pip"},
+      {"name": "lifelines", "version": "0.27.7", "package_manager": "pip"},
+      {"name": "pylatex", "version": "1.4.1", "package_manager": "pip"},
+      {"name": "pandas", "version": "2.0.3", "package_manager": "pip"},
+      {"name": "plotly", "version": "5.3.0", "package_manager": "pip"},
+      {"name": "kaleido", "version": "0.2.1", "package_manager": "pip"},
+      {"name": "texlive-latex-extra", "package_manager": "apt"},
+      {"name": "lmodern", "package_manager": "apt"}
+    ]
+  },
+  "regionalOptions": {
+    "aws:us-east-1": {
+      "systemRequirements": {
+        "*": {
+          "instanceType": "mem1_ssd1_v2_x4"
+        }
+      }
+    }
+  }
+}
